@@ -30,10 +30,10 @@ function Casino(slots, money) {
 		if(this.getTotal() < takeMon) {
 			return console.log("to much money, please try one more time with less amount");
 		} else {
-			var sorted = this.mashines.sort(function(a, b) {	
+			this.mashines.sort(function(a, b) {
 					return b.money - a.money;
-				});
-			var someMoney = takeMon;
+				}),
+				someMoney = takeMon;
 			for(let i = 0; i < sorted.length; i++) {
 					if (sorted[i].money < someMoney) {
 						someMoney = takeMon - sorted[i].money;
@@ -45,12 +45,12 @@ function Casino(slots, money) {
 						sorted[i].money = sorted[i].money - someMoney;
 						break;
 					}
-				this.mashines = sorted;
+//				this.mashines = sorted;
 				return this.mashines;
 			}
 		}
 	}
-	this.mashines.unshift(new SlotMachine(this.moneyInFirstMashine))
+	this.mashines.unshift(new SlotMachine(this.moneyInFirstMashine));
 }
 
 function SlotMachine(money) {
@@ -99,3 +99,18 @@ function SlotMachine(money) {
 		}
 	}
 }
+
+var j = new Casino(6, 6000);
+j.getMashines();
+j.getTotal();
+j.addNewMachine();
+j.removeMashine(7);
+j.takeMoney(100);
+j.mashines[3].putMoney(200);
+j.mashines[2].getTotalMoney(100);
+j.mashines[4].play(50);
+j.mashines[2].play(50);
+j.mashines[3].play(50);
+
+//module.exports = SlotMachine;
+//module.exports = Casino;
